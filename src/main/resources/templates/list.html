@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action = "#" th:action="@{/processLink}" th:object="${user}" method="post"
+enctype="multipart/form-data" class="custom">
+
+<div th:each="student : ${students}">
+    <input type="checkbox" th:value="student.name" th:text="student.name">
+</div>
+    <div th:each="course : ${courses}">
+        <input type="checkbox" th:value="student.name" th:text="student.name">
+</div>
+
+</form>
+</body>
+</html>

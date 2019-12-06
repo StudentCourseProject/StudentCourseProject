@@ -21,7 +21,18 @@ public class Student {
 
 
     @ManyToMany(mappedBy = "Student", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Collection<Coarse> coarses;
+    private Collection<Course> courses;
+
+    public Student() {
+    }
+
+    public Student(String firstName, String lastName, int DOB, String studentImage, Collection<Course> courses) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.DOB = DOB;
+        this.studentImage = studentImage;
+        this.courses = courses;
+    }
 
     public long getId() {
         return id;
@@ -63,11 +74,11 @@ public class Student {
         this.studentImage = studentImage;
     }
 
-    public Collection<Coarse> getCoarses() {
-        return coarses;
+    public Collection<Course> getCourses() {
+        return courses;
     }
 
-    public void setCoarses(Collection<Coarse> coarses) {
-        this.coarses = coarses;
+    public void setCourses(Collection<Course> coarses) {
+        this.courses = coarses;
     }
 }

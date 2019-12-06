@@ -34,11 +34,12 @@
                     <input class="form-control" type="text" id="DOB" placeholder="Username" th:field="*{DOB}"/><br><br>
                 </div>
 
-            <select name="coarseId">
+            <select name="courseId">
                 <!--            we need a value of department to pass it in-->
-                <option th:each="department : ${coarses}" th:value="${coarse.id}" th:text="${coarse.name}"></option>
+                <option th:each="department : ${courses}" th:value="${course.id}" th:text="${course.name}"></option>
 
             </select><br>
+
             Image : <input type="file" name="file"><br/><br/>
             <div th:if="${student.studentimage} !=null">
                 <img th:src="${student.studentimage}">
@@ -47,7 +48,10 @@
 
             <button type="submit" class="btn btn-primary">Submit</button>
 
-        </form></div>
+            </div>
+        </form>
+
+</div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
