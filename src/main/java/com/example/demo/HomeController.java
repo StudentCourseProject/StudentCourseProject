@@ -57,18 +57,6 @@ public class HomeController {
         return "courseform";
     }
 
-/// PROCESSING A COURSE
-
-//    @PostMapping("/processCourse")
-//    public String processCourse(@Valid @ModelAttribute Course course, BindingResult result) {
-//        if (result.hasErrors()) {
-//            return "courseform";
-//        }
-//        courseRepository.save(course);
-//        return "index";
-//    }
-
-/// ADDING A STUDENT
 
     @GetMapping("/addStudent")
     public String studentForm(Model model) {
@@ -77,24 +65,6 @@ public class HomeController {
         return "studentform";
     }
 
-//    @PostMapping("/processStudent")
-//    public String processStudent(@Valid @ModelAttribute("student") Student student,  BindingResult result,
-//                                 Model model, @RequestParam("courseId") long id, @RequestParam("file") MultipartFile file) {
-//
-//        model.addAttribute("students", userRepository.findAll());
-//        try {
-//            Map uploadResult = cloudc.upload(file.getBytes(),
-//                    ObjectUtils.asMap("resourcetype", "auto"));
-//            student.setUrl(uploadResult.get("url").toString());
-//            studentRepository.save(student);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return "redirect:/add";
-//        }
-//        studentRepository.save(student);
-//        return "index";
-//    }
     @RequestMapping("/addlink")
         public String addLink(Model model){
         model.addAttribute("courses", courseRepository.findAll());
@@ -104,9 +74,9 @@ public class HomeController {
         }
 
         @PostMapping("/processlink")
-        public String processLink(@RequestParam("courseId") long id, @RequestParam("studentId") long stdid){
-            Course course = courseRepository.findById(id).get();
-            Student student = studentRepository.findById(stdid).get();
+        public String processLink(@RequestParam("courseId") long courseId, @RequestParam("studentId") long studentId){
+            Course course = courseRepository.findById(courseId).get();
+            Student student = studentRepository.findById(studentId).get();
             Set<Student> students;
             Set<Course> courses;
             if(course.getStudents().size() > 0) {
@@ -132,16 +102,32 @@ public class HomeController {
 
 
     @PostMapping("/processStudent")
-    public String processStudent(@Valid @ModelAttribute Student student) {
+    public String processStudent(@Valid @ModelAttribute Student student, BindingResult result,
+                                 @RequestParam("file") MultipartFile file){
         studentRepository.save(student);
         Set<Course> courses;
-        if (student.getCourses() == null) {
-            courses = new HashSet<>();
-        } else {
-            courses = new HashSet<>(student.getCourses());
+        if(student.getCourses() == null){
+            courses= new HashSet<>();
+        }
+        else {
+            courses= new HashSet<>(student.getCourses());
         }
         student.setCourses(courses);
         studentRepository.save(student);
+
+        if(file.isEmpty()){
+            studentRepository.save(student);
+            return "redirect:/";
+        }
+        try{
+            Map uploadResult = cloudc.upload(file.getBytes(),
+                    ObjectUtils.asMap("resourcetype", "auto"));
+            student.setUrl(uploadResult.get("url").toString());
+            studentRepository.save(student);
+        }catch(IOException e){
+            e.printStackTrace();
+            return "studentform";
+        }
         return "redirect:/";
     }
 
