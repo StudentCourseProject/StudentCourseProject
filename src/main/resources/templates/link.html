@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron col-md-6 mx-auto" style="margin-top: 20px; padding-top: 2rem">
+        <div class="mx-auto">
+            <h1 class="display-4">Add a Student to a Course</h1>
+        </div>
+        <form class="form-signin mx-auto" action="#" th:action="@{/processlink}" method="post">
+            <div class="form-label-group">
+                <select class="form-control" name="courseId">
+                    <option th:each="course : ${courses}" th:value="${course.id}"
+                            th:text="${course.name}"></option>
+                </select>
+            </div>
+            <div class="form-label-group">
+                <select class="form-control" name="studentId">
+                    <option th:each="student : ${students}" th:value="${student.id}"
+                            th:text="${student.firstName + student.lastName}">
+                    </option>
+                </select>
+            </div>
+
+            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Submit</button>
+
+        </form>
+    </div>
+</div>
+</body>
+</html>

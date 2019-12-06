@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>Course Form</h2>
+<div>
+    <form class="form-signin mx-auto" action="#" th:action="@{/processCourse}" th:object="${course}" method="post"
+           enctype="multipart/form-data">
+    <input type="hidden" th:field="*{id}"/>
+    <input type="hidden" th:field="*{students}"/>
+    <div class="form-label-group">
+        <input type="text" class="form-control" id="name" name="name" th:field="*{name}"
+               placeholder="Course Name" required autofocus/>
+        <label for="name">Course Name</label>
+    </div>
+    <div class="form-label-group">
+        <input type="text" class="form-control" id="teacher" name="teacher" th:field="*{teacher}"
+               placeholder="Teacher" required autofocus/>
+        <label for="teacher">Teacher</label>
+    </div>
+    <div class="form-label-group">
+        <input type="text" class="form-control" id="description" name="description" th:field="*{description}"
+               placeholder="Description" required autofocus/>
+        <label for="description">Description</label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Submit</button>
+</form>
+</div>
+
+
+</body>
+</html>
