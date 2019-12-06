@@ -7,35 +7,29 @@
 <body>
 
 <h2>Course Form</h2>
-<div><form action="#" th:action="@{/processCourse}" th:object="${course}" method="post"
-           enctype="multipart/form-data" class="custom">
-    <input type="hidden" th:field="*{id}" />
-    <!--            <input type="hidden" th:field="*{image}" />-->
-    <input type="hidden" th:field="*{id}" />
-    <span th:if="${#fields.hasErrors('id')}"
-          th:errors="*{id}"></span>
-    Name :<input class="form-control" type="text" th:field="*{name}"/>
-    <span th:if="${#fields.hasErrors('name')}"
-          th:errors="*{name}"></span><br />
-    Teacher :<input class="form-control" type="text" th:field="*{teacher}" />
-    <span th:if="${#fields.hasErrors('teacher')}"
-          th:errors="*{teacher}"></span><br />
-    Description :<input class="form-control" type="text" th:field="*{description}" />
-    <span th:if="${#fields.hasErrors('description')}"
-          th:errors="*{description}"></span><br />
-
-        Student:
-        <select name="studentId"> <!--- i dont think this is right -->
-            <option value=""> -- </option>
-            <option th:each="student : ${students}"
-                    th:value="${student.id}"
-                    th:text="${student.firstName}"/>
-        </select>
-
-    <br />
-    <input type="submit" value="Submit" />
-
-</form></div>
+<div>
+    <form class="form-signin mx-auto" action="#" th:action="@{/processCourse}" th:object="${course}" method="post"
+           enctype="multipart/form-data">
+    <input type="hidden" th:field="*{id}"/>
+    <input type="hidden" th:field="*{students}"/>
+    <div class="form-label-group">
+        <input type="text" class="form-control" id="name" name="name" th:field="*{name}"
+               placeholder="Course Name" required autofocus/>
+        <label for="name">Course Name</label>
+    </div>
+    <div class="form-label-group">
+        <input type="text" class="form-control" id="teacher" name="teacher" th:field="*{teacher}"
+               placeholder="Teacher" required autofocus/>
+        <label for="teacher">Teacher</label>
+    </div>
+    <div class="form-label-group">
+        <input type="text" class="form-control" id="description" name="description" th:field="*{description}"
+               placeholder="Description" required autofocus/>
+        <label for="description">Description</label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Submit</button>
+</form>
+</div>
 
 
 </body>

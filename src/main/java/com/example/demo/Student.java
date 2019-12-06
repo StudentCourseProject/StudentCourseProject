@@ -2,35 +2,51 @@ package com.example.demo;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
+
+    @Column(name = "student_id")
+
     private long id;
 
-    @Column(unique=true)
     private String firstName;
 
     private String lastName;
 
-    private int DOB;
+    private String DOB;
 
-    private String studentImage;
+    private String url;
 
 
-    @ManyToMany(mappedBy = "Student", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Collection<Course> courses;
+    @ManyToMany
+    @JoinTable(
+            name = "course_student",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id"))
+    private Set<Course> courses;
 
     public Student() {
     }
 
-    public Student(String firstName, String lastName, int DOB, String studentImage, Collection<Course> courses) {
+    public Student(String firstName, String lastName, String DOB, String url) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.DOB = DOB;
-        this.studentImage = studentImage;
+        this.url = url;
+        this.courses = new HashSet<>();
+    }
+    public Student(String firstName, String lastName, String DOB, String url, Set<Course> courses) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.DOB = DOB;
+        this.url = url;
         this.courses = courses;
     }
 
@@ -58,27 +74,27 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public int getDOB() {
+    public String getDOB() {
         return DOB;
     }
 
-    public void setDOB(int DOB) {
+    public void setDOB(String DOB) {
         this.DOB = DOB;
     }
 
-    public String getStudentImage() {
-        return studentImage;
+    public String getUrl() {
+        return url;
     }
 
-    public void setStudentImage(String studentImage) {
-        this.studentImage = studentImage;
+    public void setUrl(String studentImage) {
+        this.url = studentImage;
     }
 
-    public Collection<Course> getCourses() {
+    public Set<Course> getCourses() {
         return courses;
     }
 
-    public void setCourses(Collection<Course> coarses) {
-        this.courses = coarses;
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
     }
 }

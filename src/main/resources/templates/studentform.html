@@ -11,44 +11,37 @@
 <div class="card">
     <div class="card-body">
         <h4>New Student registration</h4>
-        <form autocomplete="off" action="#" th:action="@{/}" th:object="${student}" method="post" enctype="multipart/form-data" >
-            <div class="form-group">
-                <label>First Name: </label><mark><strong>
-    <span th:if="${#fields.hasErrors('firstName')}"
-          th:errors="*{firstName}">First Name Error</span></strong></mark>
-                <input class="form-control" type="text" id="firstName" placeholder="First Name" th:field="*{firstName}"/><br><br>
+        <form class="form-signin mx-auto" action="#" th:action="@{/processStudent}" th:object="${student}" method="post"
+              enctype="multipart/form-data">
+            <input type="hidden" th:field="*{id}"/>
+            <input type="hidden" th:field="*{url}"/>
+            <input type="hidden" th:field="*{courses}"/>
+            <div class="form-label-group">
+                <input type="text" class="form-control" id="firstname" name="firstname" th:field="*{firstName}"
+                       placeholder="First Name" required autofocus/>
+                <label for="firstname">First Name</label>
+            </div>
+            <div class="form-label-group">
+                <input type="text" class="form-control" id="lastname" name="lastname" th:field="*{lastName}"
+                       placeholder="Last Name" required autofocus/>
+                <label for="lastname">Last Name</label>
+            </div>
+
+            <div class="form-label-group">
+                <input type="text" class="form-control" id="DOB" name="DOB" th:field="*{DOB}"
+                       placeholder="Date of Birth" required autofocus/>
+                <label for="DOB">Date of Birht</label>
             </div>
             <div class="form-group">
-                <label>Last Name: </label><mark><strong>
-    <span th:if="${#fields.hasErrors('lastName')}"
-          th:errors="*{lastName}">Last Name Error</span></strong></mark>
-                <input class="form-control" type="text" id="lastName" placeholder="Last Name" th:field="*{lastName}"/><br><br>
-            </div>
-            <div class="form-group">
-
-
-                <div class="form-group">
-                    <label>Date of Birth: </label><mark><strong>
-    <span th:if="${#fields.hasErrors('DOB')}"
-          th:errors="*{DOB}">Username Error</span></strong></mark>
-                    <input class="form-control" type="text" id="DOB" placeholder="Username" th:field="*{DOB}"/><br><br>
+                <div th:if="${student.url != null and !student.url.equals('')}">
+                    <img th:src="${student.url}"/>
                 </div>
-
-            <select name="courseId">
-                <!--            we need a value of department to pass it in-->
-                <option th:each="department : ${courses}" th:value="${course.id}" th:text="${course.name}"></option>
-
-            </select><br>
-
-            Image : <input type="file" name="file"><br/><br/>
-            <div th:if="${student.studentimage} !=null">
-                <img th:src="${student.studentimage}">
+                <label th:if="${student.url != null and !student.url.equals('')}" for="image">Image(Optional, max size: 1MB)</label>
+                <label th:unless="${student.url != null and !student.url.equals('')}" for="image">Image(max size: 1MB)</label>
+                <input type="file" class="form-control-file" id="image" name="file" th:src="${student.url}"/>
+                <input type="hidden" th:field="*{id}"/>
             </div>
-            <br>
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-
-            </div>
+            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Submit</button>
         </form>
 
 </div>

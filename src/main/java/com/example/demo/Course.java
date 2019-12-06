@@ -7,27 +7,26 @@ import java.util.Set;
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
+
+    @Column(name = "course_id")
+
     private long id;
-
-    @Column(unique = true)
     private String name;
-
-    @Column(name = "teacher")
     private String teacher;
+    private String description;
 
-    @ManyToMany(mappedBy = "students", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "courses")
     public Set<Student> students;
 
-    @Column(name = "description")
-    private String description;
+
 
     public Course() {
     }
 
-    public Course(String name, String teacher, Set<Student> students, String description) {
+    public Course(String name, String teacher, String description) {
         this.name = name;
         this.teacher = teacher;
-        this.students = students;
         this.description = description;
     }
 
