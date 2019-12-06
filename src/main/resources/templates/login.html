@@ -12,7 +12,7 @@
     <script src="https://kit.fontawesome.com/d0065a9586.js" crossorigin="anonymous"></script>
     <script type="text/javascript">
         $(document).on('click','.navbar-collapse.in',function(e) {
-            if( $(e.target).is('a') && ( $(e.target).attr('class') != 'dropdown-toggle'
+            if( $(e.target).is('a') && ( $(e.target).attr('class') !== 'dropdown-toggle'
             ) ) {
                 $(this).collapse('hide');
             }
@@ -53,7 +53,12 @@
 <footer th:replace="base :: footer"></footer>
 
 <!--JavaScript-->
+
 <script>
+    function myFunction() {
+        document.getElementById("disappear").style.display = "none";
+    }
+
     $('a[data-toggle="tooltip"]').tooltip({
         animated: 'fade',
         placement: 'bottom',
