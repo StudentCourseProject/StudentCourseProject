@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Learn</title>
+    <link rel="icon" href="https://i.imgur.com/VGheu4Y.png"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/coursestyle.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link th:href="@{/css/waypoints.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/d0065a9586.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).on('click','.navbar-collapse.in',function(e) {
+            if( $(e.target).is('a') && ( $(e.target).attr('class') != 'dropdown-toggle'
+            ) ) {
+                $(this).collapse('hide');
+            }
+        });
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" th:fragment="navbar">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item active">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary spaceAbove2" type="button" >
+                            Add a Student
+                        </button>
+                    </div>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/"><i class="fas fa-book-open fa-2x mover"></i></a>
+                </li>
+                <li class="nav-item active">
+                    <button class="btn btn-secondary spaceAbove2" type="button" >
+                        Add a Course
+                    </button>
+
+<!--                                <form class="form-inline" th:action="@{/searchlist}" method="post">-->
+<!--                                    <input class="form-control" name="searchString" type="search" placeholder="Search" aria-label="Search">-->
+<!--                                    <button class="btn btn-outline-success my-2 my-sm-0 mx-auto" type="submit">Search</button>-->
+<!--                                </form>-->
+
+
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!--Footer-->
+<footer th:fragment="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="mx-auto spaceAbove paddingBottom2">
+                <h5>&copy; Learn 2019</h5>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!--.intro {-->
+<!--font-family: 'Open Sans', sans-serif;-->
+<!--font-size: 300%;-->
+<!--font-weight: 800;-->
+<!--text-decoration: none !important;-->
+<!--color: #494f81;-->
+<!--}-->
+<!--.intro:hover {-->
+<!--color: #3a3c4f;-->
+<!--}-->
+
+<th:block th:fragment="jslinks">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</th:block>
+</body>
+</html>

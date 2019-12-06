@@ -1,33 +1,65 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:fragment="head">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Learn</title>
+    <link rel="icon" href="https://i.imgur.com/VGheu4Y.png"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/coursestyle.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link th:href="@{/css/waypoints.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/d0065a9586.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).on('click','.navbar-collapse.in',function(e) {
+            if( $(e.target).is('a') && ( $(e.target).attr('class') != 'dropdown-toggle'
+            ) ) {
+                $(this).collapse('hide');
+            }
+        });
+    </script>
 </head>
 <body>
 
-    <h1>LOGIN PAGE</h1>
-    <div th:if="${param.error}">
-        Invalid username or password.
+<section class="intro">
+    <div class="inner">
+        <div class="content">
+            <section class="animated bounceInUp"><h1>LEARN</h1></section>
+            <button type="button" id="disappear" class="btn btn-danger btn-block col-3 mx-auto animated bounceInUp padding delay-1s" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="myFunction()">LOGIN</button>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body border border-dark col-6 col-sm-5 col-md-4 col-lg-3 mx-auto marginTop">
+                    <form class="mb-1" th:action="@{/login}" method="post">
+                        <div class="form-group mx-auto">
+                            <label for="staticEmail2" class="sr-only">Email</label>
+                            <input type="text" name="username" class="form-control" id="staticEmail2" placeholder="Enter email">
+                        </div>
+                        <div class="form-group mx-auto">
+                            <label for="inputPassword2" class="sr-only">Password</label>
+                            <input type="password" name="password" class="form-control" id="inputPassword2" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-danger">SUBMIT</button>
+                    </form>
+                </div>
+            </div>
+            <div class="mx-auto animated bounceInUp delay-1s roboto" th:if="${param.error}">
+                Invalid username or password
+            </div>
+        </div>
     </div>
-    <div th:if="${param.logout}">
-        You have been logged out.
-    </div>
-
-    <form th:action="@{/login}" method="post">
-        <div>
-        <label>Username: <input type="text" name="username"/></label>
-        </div>
-
-        <div>
-        <label>Password: <input type="password" name="password"/></label>
-        </div>
-
-        <div>
-        <input type="submit" value="Login"/>
-        </div>
-    </form>
+</section>
 
 
+<!--Footer-->
+<footer th:replace="base :: footer"></footer>
+
+<!--JavaScript-->
+<script>
+    $('a[data-toggle="tooltip"]').tooltip({
+        animated: 'fade',
+        placement: 'bottom',
+        html: true
+    });
+</script>
+<th:block th:replace="base :: jslinks"></th:block>
 </body>
 </html>
