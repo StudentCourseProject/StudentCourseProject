@@ -35,7 +35,9 @@ public class HomeController {
 
     /// SECURE LOGIN
     @RequestMapping("/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("courses", courseRepository.findAll());
+        model.addAttribute("students", studentRepository.findAll());
         return "index";
     }
 

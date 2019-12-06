@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<head th:replace="base :: head"></head>
 <body>
+
+<!--Navigation-->
+<nav th:replace="base :: navbar"></nav>
 
 <h2>Course Form</h2>
 <div>
@@ -32,5 +32,10 @@
 </div>
 
 
+<!--Footer-->
+<footer th:replace="base :: footer"></footer>
+
+<!--JavaScript-->
+<th:block th:replace="base :: jslinks"></th:block>
 </body>
 </html>
